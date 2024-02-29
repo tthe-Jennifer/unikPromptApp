@@ -2,7 +2,6 @@ import { Session } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
-import { authConfig } from "@/app/lib/auth";
 
 
 import { connectToDb } from "@utils/database";
