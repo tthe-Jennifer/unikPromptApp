@@ -3,7 +3,7 @@ import Prompt from "@models/prompt";
 
 
 //Get - Read
-export const GET = async (request, { params }) => {
+export const GET = async (request: any, { params }: any) => {
     try {
         await connectToDb();
 
@@ -20,7 +20,7 @@ export const GET = async (request, { params }) => {
 }
 
 //Patch (update)
-export const PATCH = async (request, { params }) => {
+export const PATCH = async (request: { json: () => PromiseLike<{ prompt: any; tag: any; }> | { prompt: any; tag: any; }; }, { params }: any) => {
     const {prompt, tag} = await request.json();
 
     try {
@@ -44,7 +44,7 @@ export const PATCH = async (request, { params }) => {
     }
 }
 //Delete
-export const DELETE = async (request, { params }) => {
+export const DELETE = async (request: any, { params }: any) => {
     try {
        await connectToDb();
        await Prompt.findByIdAndDelete(params.id);
