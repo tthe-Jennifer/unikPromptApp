@@ -4,6 +4,13 @@ import GoogleProvider from 'next-auth/providers/google';
 import User from '@models/user';
 import { connectToDb } from '@utils/database';
 
+interface UserSession {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+  id?: string; // Add the 'id' property here
+}
+
 const handler = NextAuth({
   providers: [
     GoogleProvider({
@@ -20,7 +27,7 @@ const handler = NextAuth({
         const sessionUser = await User.findOne({ email: session.user.email });
     
         if (sessionUser) {
-          session.user.id = sessionUser._id.toString();
+          (session.user as UserSession).id = sessionUser._id.toString();
         }
       }
 
