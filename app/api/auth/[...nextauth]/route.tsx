@@ -1,3 +1,4 @@
+"use client";
 import { Session } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
@@ -14,7 +15,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session }: { session?: session }) {
+    async session({ session }: { session?: Session }) {
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
