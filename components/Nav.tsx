@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -19,13 +19,23 @@ const Nav = () => {
 
   useEffect(() => {
     const setUpProviders = async () => {
-      const response = await getProviders()
+      const response: any = await getProviders()
 
       setProviders(response);
     }
 
     setUpProviders();
   }, [])
+
+  const handleSignOut: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    event.preventDefault();
+  
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
@@ -39,9 +49,9 @@ const Nav = () => {
         {session?.user ? 
         (<div className='flex gap-3 md:gap-5'>
           <Link href="/create-prompt" className='black_btn'>Create Post</Link>
-          <button type='button' onClick={signOut} className='outline_btn'>Sign Out</button>
+          <button type='button' onClick={handleSignOut} className='outline_btn'>Sign Out</button>
           <Link href="/profile">
-            <Image src={session?.user.image} alt="profile" width="37" height="37" className='rounded-full' />
+            <Image src={session?.user.image!} alt="profile" width="37" height="37" className='rounded-full' />
 
           </Link>
         </div>)
@@ -49,7 +59,7 @@ const Nav = () => {
         (<>
         {/* providers && checks if we have access to providers */}
         {providers &&
-        Object.values(providers).map((provider) => (
+        Object.values(providers).map((provider: any) => (
           <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>
             Sign In
           </button>
@@ -63,7 +73,7 @@ const Nav = () => {
       {/* {Mobile Navigation} */}
       <div className="sm:hidden flex relative">
         {session?.user ? (<div className='flex'>
-        <Image src={session?.user.image} alt="profile" width="37" height="37" className='rounded-full' onClick={() => setToggleDropdown((prev) => !prev)} />
+        <Image src={session?.user.image!} alt="profile" width="37" height="37" className='rounded-full' onClick={() => setToggleDropdown((prev) => !prev)} />
         {toggleDropdown && (
           <div className='dropdown'>
             <Link href="/profile" className='dropdown_link' onClick={() => setToggleDropdown(false)}>
@@ -86,7 +96,7 @@ const Nav = () => {
           <>
         {/* providers && checks if we have access to providers */}
         {providers &&
-        Object.values(providers).map((provider) => (
+        Object.values(providers).map((provider: any) => (
           <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>
             Sign In
           </button>
