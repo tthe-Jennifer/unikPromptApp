@@ -17,7 +17,7 @@ const CreatePrompt = () => {
         tag: '',
     })
 
-    const createPrompt = async (e) => {
+    const createPrompt = async (e: any) => {
         e.preventDefault();
 
         setSubmitting(true);
