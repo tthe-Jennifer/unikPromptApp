@@ -7,7 +7,7 @@ import Form from '@components/Form';
 
 const CreatePrompt = () => {
 
-    interface Prompt {
+    interface User {
         name?: string | null | undefined;
         email?: string | null | undefined;
         image?: string | null | undefined;
@@ -35,7 +35,7 @@ const CreatePrompt = () => {
                 method: 'POST',
                 body: JSON.stringify({
                     prompt: post.prompt,
-                    userId: session?.user?.id,
+                    userId: (session?.user as User)?.id,
                     tag: post.tag,
                 })
             })
