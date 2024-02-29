@@ -20,7 +20,7 @@ export const GET = async (request: any, { params }: any) => {
 }
 
 //Patch (update)
-export const PATCH = async (request: { json: () => PromiseLike<{ prompt: any; tag: any; }> | { prompt: any; tag: any; }; }, { params }: any) => {
+export const PATCH = async (request: any, { params }: any) => {
     const {prompt, tag} = await request.json();
 
     try {
