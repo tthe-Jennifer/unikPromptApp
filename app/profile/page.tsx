@@ -8,6 +8,12 @@ import Profile from "@components/Profile";
 import { Router } from "next/router";
 
 const MyProfile = () => {
+
+  interface Post {
+    _id: string;
+    // other properties of a post...
+  }
+
   interface User {
     name?: string | null | undefined;
     email?: string | null | undefined;
@@ -49,7 +55,7 @@ const MyProfile = () => {
           method: "DELETE",
         });
 
-        const filteredPosts = posts.filter((p) => p._id !== post._id);
+        const filteredPosts = posts.filter((p: Post) => p._id !== post._Id);
 
         setPosts(filteredPosts);
       } catch (error) {
