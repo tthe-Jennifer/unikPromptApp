@@ -1,5 +1,5 @@
 // import '../styles/globals.css';
-"use client";
+// "use client";
 import '@styles/globals.css'
 import { ReactNode } from 'react';
 import React from 'react'
