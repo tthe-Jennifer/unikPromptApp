@@ -13,6 +13,7 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}: any) => {
     email?: string | null | undefined;
     image?: string | null | undefined;
     id?: string; // Add the 'id' property here
+    _id?: string;
   }
 
   const { data: session } = useSession();
@@ -56,7 +57,7 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete}: any) => {
       <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
       <p className='font-inter text-sm blue_gradient cursor-pointer' onClick={() => handleTagClick && handleTagClick(post.tag)}>#{post.tag}</p>
 
-      {(session?.user as User)?.id === post.creator._id && pathname === '/profile' && (
+      {(session?.user as User)?.id === post.creator?._id && pathname === '/profile' && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
           <p
           className='font-inter text-sm green_gradient cursor-pointer'
